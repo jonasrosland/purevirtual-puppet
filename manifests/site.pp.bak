@@ -1,0 +1,135 @@
+node puppet {
+  class { 'sudo':
+    config_file_replace => false,
+  }
+  include razor
+
+ dnsmasq::conf { 'another-config':
+   ensure => present,
+   content => "dhcp-range=192.168.72.100,192.168.72.150,12h\ndhcp-boot=pxelinux.0\ndhcp-option=3,192.168.72.2\ndhcp-option=6,192.168.72.5\ndomain=purevirtual.lab\nexpand-hosts\ndhcp-host=puppet,192.168.72.5\nserver=8.8.8.8\n",
+ }
+
+ rz_broker { 'puppet_broker':
+  ensure => present,
+  plugin => 'puppet',
+  metadata => { 
+    broker_version => '2.7.18',
+    server => 'puppet.purevirtual.lab',
+  }
+ }
+
+rz_image { "ubuntu_precise_image":
+  ensure  => present,
+  type    => 'os', 
+  version => '12.04.1',
+  source  => "http://ftp.sunet.se/pub/os/Linux/distributions/ubuntu/ubuntu-cd/12.04.1/ubuntu-12.04.1-server-amd64.iso",
+}
+
+rz_model { 'install_ubuntu_precise':
+  ensure => present,
+  description => 'Ubuntu Precise',
+  image => 'ubuntu_precise_image',
+  metadata => {'domainname' => 'purevirtual.lab', 'hostname_prefix' => 'ubuntu-', 'root_password' => 'password'},
+  template => 'ubuntu_precise',
+}
+
+rz_policy { 'ubuntu_precise_policy':
+  ensure  => present,
+  broker  => 'puppet_broker',
+  model   => 'install_ubuntu_precise',
+  enabled => 'true',
+  tags    => ['memsize_1GiB'],
+  template => 'linux_deploy',
+  maximum => 10,
+}
+
+    # a tag to identify my <controller.hostname>
+    rz_tag { "mac_eth0_of_the_namenode":
+        tag_label   => "mac_eth0_of_the_namenode",
+        tag_matcher => [ {
+                        'key'     => 'mk_hw_nic0_serial',
+                        'compare' => 'equal',
+                        'value'   => "00:0c:29:bb:be:b8",
+                    } ],
+    }
+
+    # a tag to identify my <compute?.hostname>
+    rz_tag { "not_mac_eth0_of_the_namenode":
+        tag_label   => "not_mac_eth0_of_the_namenode",
+        tag_matcher => [ {
+                        'key'     => 'mk_hw_nic0_serial',
+                        'compare' => 'equal',
+                        'value'   => "00:0c:29:bb:be:b8",
+                        'inverse'  => "true",
+                    } ],
+    }
+
+    rz_model { 'namenode_model':
+      ensure      => present,
+      description => 'NameNode Ubuntu Model',
+      image       => 'ubuntu_precise_image',
+      metadata    => {'domainname' => 'purevirtual.lab', 'hostname_prefix' => 'namenode', 'root_password' => 'password'},
+      template    => 'ubuntu_precise',
+    }
+
+    rz_model { 'datanode_model':
+      ensure      => present,
+      description => 'DataNode Ubuntu Model',
+      image       => 'ubuntu_precise_image',
+      metadata    => {'domainname' => 'purevirtual.lab', 'hostname_prefix' => 'datanode', 'root_password' => 'password'},
+      template    => 'ubuntu_precise',
+    }
+
+    rz_policy { 'namenode_policy':
+      ensure  => present,
+      broker  => 'puppet_broker',
+      model   => 'namenode_model',
+      enabled => 'true',
+      tags    => ['mac_eth0_of_the_namenode', 'memsize_512MiB'],
+      template => 'linux_deploy',
+      maximum => 1,
+    }    
+    rz_policy { 'datanode_policy':
+      ensure  => present,
+      broker  => 'puppet_broker',
+      model   => 'datanode_model',
+      enabled => 'true',
+      tags    => ['not_mac_eth0_of_the_namenode', 'memsize_512MiB', 'cpus_2'],
+      template => 'linux_deploy',
+      maximum => 3,
+    }
+
+rz_image { "centos_6_3_image":
+  ensure  => present,
+  type    => 'os', 
+  version => '6.3',
+  source  => "http://ftp.sunet.se/pub/Linux/distributions/centos/6/isos/x86_64/CentOS-6.3-x86_64-minimal.iso",
+}
+
+rz_model { 'install_centos_6_3':
+  ensure => present,
+  description => 'Centos_6.3',
+  image => 'centos_6_3_image',
+  metadata => {'domainname' => 'purevirtual.lab', 'hostname_prefix' => 'centos-', 'root_password' => 'password'},
+  template => 'centos_6',
+}
+
+rz_policy { 'centos_6_3_policy':
+  ensure  => present,
+  broker  => 'puppet_broker',
+  model   => 'install_centos_6_3',
+  enabled => 'true',
+  tags    => ['memsize_2GiB'],
+  template => 'linux_deploy',
+  maximum => 10,
+}
+
+}
+
+node /namenode/ {
+  include hadoop, java, hosts
+}
+
+node /datanode/ {
+  include hadoop, java, hosts
+}

@@ -1,0 +1,42 @@
+{
+  "checksums": {
+    "templates/module/proxy.conf.erb": "2eccd5a67ff4070bdd6ed8cd98b4bbda",
+    "manifests/init.pp": "bc4982ea713c7113010b7114cee007e1",
+    "templates/virtualhost/vhost.conf.erb": "274b5c5017279e947d3c9122e78cc929",
+    "manifests/vhost.pp": "37e415918558d934bc4cfbc3c27cf6f7",
+    "manifests/redhat.pp": "7bf95178474b51eb75a37931e4ec4d2f",
+    "spec/classes/apache_spec.rb": "3022fae3e6700785cdb063c0a0c60deb",
+    "manifests/passenger.pp": "471b18ed8769eb16b1fbeb955e3d28c9",
+    "Modulefile": "9446a2c716b155820641c3cd82898944",
+    "manifests/virtualhost.pp": "2ab4d2e6663b1d243a6dfa6e928900f0",
+    "manifests/params.pp": "bcf191c693e68bf01b93eec418c776bd",
+    "manifests/module.pp": "e6e2db0fb8e594bf5502e3f873e0fa0c",
+    "spec/defines/apache_virtualhost_spec.rb": "b21d44a66c262561f3db5dc063813f7a",
+    "Rakefile": "db67bde0625f9c5f11fed4f117befe1e",
+    "manifests/ssl.pp": "2ddefba1a9a2a64e51ce40fbb6323aa9",
+    "manifests/spec.pp": "27b6dcd653caef771ac053e2df3260e9",
+    "manifests/dotconf.pp": "79ba159e636364faa98c69685f105c3b",
+    "templates/00-NameVirtualHost.conf.erb": "a410a82e9c65d36c7537bfb36a7a3041",
+    "spec/spec_helper.rb": "8ce946c8eaeeb3bd82fcdbbd60953f5b",
+    "templates/virtualhost/virtualhost.conf.erb": "f208a6e002786864a69d542330e64992",
+    "templates/spec.erb": "95554a191230174b3ba5942f8d8d5b1e",
+    "README.rdoc": "c240e2bcd1965ceeaa505e243faa6f1f"
+  },
+  "license": "Apache2",
+  "types": [
+
+  ],
+  "version": "2.0.7",
+  "dependencies": [
+    {
+      "version_requirement": ">= 2.0.0",
+      "name": "example42/puppi"
+    }
+  ],
+  "summary": "Puppet module for apache",
+  "source": "https://github.com/example42/puppet-apache",
+  "description": "This module installs and manages apache. Check README.rdoc for details. Puppi is required for some common functions: you can install them without using the whole module. Monitor and firewall dependencies are needed only if the relevant features are enabled",
+  "author": "Alessandro Franceschi",
+  "name": "example42-apache",
+  "project_page": "http://www.example42.com"
+}

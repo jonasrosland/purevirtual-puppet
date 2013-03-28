@@ -1,0 +1,31 @@
+{
+  "project_page": "https://github.com/biemond/puppet/tree/master/modules/oradb",
+  "author": "Edwin Biemond",
+  "source": "https://github.com/biemond/puppet/tree/master/modules/oradb",
+  "checksums": {
+    "manifests/init.pp": "23dfca4cfc24155519bdc9dfda979481",
+    "lib/puppet/parser/functions/opatch_exists.rb": "4f8da5204d5e9618ae20fca443a4b59c",
+    "manifests/listener.pp": "4e2f4d5c118f76ce24cf03950c87f6dd",
+    "templates/db_install_11.2.0.3.rsp.erb": "2f0dcd0516d430391147516ca18a120e",
+    "templates/oraInst.loc.erb": "70013a28b30ebc30277c6464895c1ffd",
+    "manifests/installdb.pp": "81551735061420d71c8c793d846f6b63",
+    "manifests/opatch.pp": "694b2678ae0e5d3a014bef9b83a7b6d3",
+    "README.md": "2463fe81573301e84bae0b35f807e3f4",
+    "templates/db_install_11.2.0.1.rsp.erb": "10de871187658d4cf321e8863c86de0a",
+    "lib/facter/oracle_database_homes.rb": "cca6aadbd174c1c60d26cf0309c9395b",
+    "Modulefile": "ae252cf9f18aeb9ecf60de87632eada6",
+    "lib/puppet/parser/functions/oracle_exists.rb": "1e9bf6da767a05da8305d005f45afb40",
+    "templates/bash_profile.erb": "f7a0947d3b6d87438a96104304de2117"
+  },
+  "license": "GNU General Public License version 3 of the License",
+  "types": [
+
+  ],
+  "name": "biemond-oradb",
+  "version": "0.3.0",
+  "dependencies": [
+
+  ],
+  "description": "Oracle Database 11g R2 11.2 puppet module",
+  "summary": "Oracle Database 11g R2 11.2 linux"
+}

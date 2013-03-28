@@ -1,0 +1,27 @@
+{
+  "name": "virtualswede-lighttpd",
+  "version": "0.0.2",
+  "source": "UNKNOWN",
+  "author": "virtualswede",
+  "license": "Apache License, Version 2.0",
+  "summary": "UNKNOWN",
+  "description": "Standard installation of lighttpd tested on Ubuntu. Also includes a standard lighttpd configuration file and a standard index.html file.",
+  "project_page": "UNKNOWN",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Modulefile": "8738e7e6a5ba765a732e54560957b164",
+    "README": "6b2140dcb685e2b38e91e16db8ab86c3",
+    "files/index.html": "949643fe1802d403879803db047aa9a0",
+    "files/lighttpd.conf": "0ef8e76747a5f4ece7161da8e48f1d99",
+    "manifests/config.pp": "1ca9b4a2e9f5b01ed9c29a7c105f6131",
+    "manifests/indexfile.pp": "73a14648f4264cd9df0355a2befcfc23",
+    "manifests/init.pp": "4ea2860caed2fd9af3e1e3796fc9b6d8",
+    "manifests/install.pp": "680a3cb1c44e7f5ba169e30616d4453a",
+    "manifests/service.pp": "593bca1a2cbf6d35a3cd13a3e0072a2a"
+  }
+}
